@@ -1,0 +1,233 @@
+@import "./mixin";
+
+.box {
+  @include glassBG();
+  padding: 15px;
+  border-radius: 15px;
+
+  &__title {
+    margin-bottom: 5px;
+    color: #333;
+    padding-left: 10px;
+    font-size: 20px;
+  }
+}
+
+._steps {
+  margin-top: 30px;
+  position: relative;
+  &__list {
+    padding: 0 10px;
+  }
+
+  &__item {
+    display: flex;
+    flex-wrap: wrap;
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+
+    &:hover {
+      box-shadow: 0px 10px 30px -2px rgba(0, 0, 0, 0.12);
+      ._steps__index {
+        border-radius: 10px 0 0 10px;
+      }
+      ._steps__detail {
+        background-color: #fff;
+      }
+    }
+
+    &:nth-child(1) {
+      ._steps__index {
+        background: #56ccf2;
+
+        &:after {
+          border-left-color: #56ccf2;
+        }
+      }
+    }
+
+    &:nth-child(2) {
+      ._steps__index {
+        background: #2d9cdb;
+
+        &:after {
+          border-left-color: #2d9cdb;
+        }
+      }
+    }
+
+    &:nth-child(3) {
+      ._steps__index {
+        background: #2f80ed;
+
+        &:after {
+          border-left-color: #2f80ed;
+        }
+      }
+    }
+
+    &:nth-child(4) {
+      ._steps__index {
+        background: #1c6eda;
+
+        &:after {
+          border-left-color: #1c6eda;
+        }
+      }
+    }
+
+    &:nth-child(5) {
+      ._steps__index {
+        background: #9b51e0;
+
+        &:after {
+          border-left-color: #9b51e0;
+        }
+      }
+    }
+  }
+
+  &__index {
+    width: 180px;
+    min-height: 185px;
+    position: relative;
+    @include flexCenter();
+    background-color: #333;
+    color: #fff;
+    transition: 0.5s ease-in-out;
+    font-size: 50px;
+    font-weight: bold;
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: 3;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 100%;
+      border-left: 20px solid #333;
+      border-top: 20px solid transparent;
+      border-bottom: 20px solid transparent;
+    }
+  }
+
+  &__detail {
+    border-radius: 0 10px 10px 0;
+    width: calc(100% - 180px);
+    position: relative;
+    padding: 20px 25px;
+    transition: 0.5s ease;
+    background-color: transparent;
+
+    input {
+      &:focus {
+        border: 1px solid #b4b4b4;
+      }
+    }
+
+    textarea {
+      width: 100%;
+      border: none;
+      padding: 10px;
+      min-height: 125px;
+      resize: none;
+      &:focus {
+        border: 1px solid #b4b4b4;
+      }
+    }
+  }
+}
+
+._help {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  z-index: 3;
+
+  img {
+    width: 25px;
+    height: 25px;
+
+    &:hover {
+      & + ._help__content {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__content {
+    position: absolute;
+    bottom: calc(100% + 3px);
+    opacity: 0;
+    right: 0;
+    z-index: 3;
+    width: 300px;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 12px;
+    transition: 0.5s ease;
+    p {
+      color: #fff;
+    }
+  }
+}
+
+._form {
+  &__footer {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10px;
+    button {
+      width: 120px;
+      border-radius: 20px;
+      height: 40px;
+      color: rgb(0, 0, 0);
+      box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.25);
+      transition: ease 0.5s;
+      &:hover {
+        box-shadow: unset;
+      }
+
+      &._btn__add {
+        margin-right: 20px;
+        border: 2px solid #05ee6a;
+        &:hover {
+          //   background-image: linear-gradient(to bottom, #05ee6a, #049241);
+          background-color: #05ee6a;
+          color: #fff;
+        }
+      }
+
+      &._btn__save {
+        border: 2px solid #1c6eda;
+        &:hover {
+          //   background-image: linear-gradient(to bottom, #5e94dc, #004cb1);
+          background-color: #1c6eda;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+._empty {
+  @include flexCenter();
+  width: 100%;
+  flex-direction: column;
+  padding: 20px 0;
+
+  p {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  button {
+    width: 120px;
+    height: 36px;
+    border-radius: 18px;
+    background-image: linear-gradient(to bottom, #05ee6a, #049241);
+    color: #fff;
+    box-shadow: 5px 5px 20px -3px rgba(0, 0, 0, 0.25);
+  }
+}

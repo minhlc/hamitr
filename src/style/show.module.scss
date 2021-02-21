@@ -1,15 +1,18 @@
 @import "./mixin";
 
-input {
+input,
+textarea {
   height: 40px;
   border-radius: 5px;
   width: 100%;
   background: transparent;
   transition: 0.5 ease;
   padding: 0 10px;
-
+  font-family: inherit;
+  font-size: inherit;
   &:focus {
     background-color: #fff;
+    outline: none;
   }
 }
 

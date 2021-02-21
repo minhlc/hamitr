@@ -20,16 +20,18 @@ function ShowStep(props) {
 
   const ChangeInput = (event) => {
     event.preventDefault();
-    setStep({
-      newStep: {
-        ...step,
-        [event.target.name]: event.target.value,
-      },
-    });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.which === 13 && event.shiftKey) {
+      event.target.value = event.target.value + "\n";
+    } else if (event.key === "Enter") {
+      AddStep();
+    }
   };
 
   return (
@@ -50,7 +52,7 @@ function ShowStep(props) {
             <b>
               <i>Shift + Enter</i>
             </b>{" "}
-            to next.
+            to new line.
           </p>
         </div>
       </div>
@@ -67,12 +69,15 @@ function ShowStep(props) {
                     name={`step[${item.id}][title]`}
                     defaultValue={item.title}
                     onChange={ChangeInput}
+                    onKeyDown={handleKeyDown}
+                    autoFocus={item.id === step.length - 1 ? true : false}
                   />
                   <textarea
                     name={`step[${item.id}][description]`}
                     placeholder="Moutain is a mountain"
                     cols="30"
                     defaultValue={item.description}
+                    onKeyDown={handleKeyDown}
                     onChange={ChangeInput}
                   ></textarea>
                 </div>

@@ -25,10 +25,15 @@ function Search(props) {
     setShowSuggest(true);
   };
 
+  const suggestClass = () => {
+    return 'search ' + (showSuggest ? 'active':'default')
+  }
+
   return (
-    <div className={style.search}>
-      <form className={style.form}>
-        <div className={style.icon}>
+   <div className="_container-search">
+    <div className={suggestClass()}>
+      <form className="form">
+        <div className="icon">
           <img src={SearchIcon} alt="search icon" />
         </div>
         <input type="text" onClick={ToggleSuggest} />
@@ -36,9 +41,9 @@ function Search(props) {
       </form>
 
       {showSuggest ? (
-        <div className={style.suggest}>
-          <div className={style.suggest__content}>
-            <div className={style.suggest__list}>
+        <div className="suggest">
+          <div className="suggest__content">
+            <div className="suggest__list">
               <ul>
                 {parse(response)}
               </ul>
@@ -46,11 +51,10 @@ function Search(props) {
           </div>
         </div>
       ) : (
-        <p className={style.hint}>
-          ex. Fabbi JSC, Edso Labs, Together we can do it, ...
-        </p>
+        <></>
       )}
     </div>
+   </div>
   );
 }
 

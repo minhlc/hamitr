@@ -1,11 +1,30 @@
 @import "./mixin";
 
-._container {
+._container-search {
   padding-top: 120px;
 }
 
+.search {
+  width: 670px;
+  margin:  0 auto;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 30px;
+  transition: .5s ease;
+  box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.15);
+
+  &.active {
+    height: 380px;
+
+    .form {
+      &:before {
+        opacity: 1;
+      }
+    }
+  }
+}
+
 .form {
-  // @include glassBG();
   @include flexCenter();
   border-radius: 40px;
   width: 670px;
@@ -13,7 +32,6 @@
   padding: 10px;
   margin: 0 auto;
   position: relative;
-  // box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.25);
 
   &:before {
     content: "";

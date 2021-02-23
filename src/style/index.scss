@@ -1,11 +1,56 @@
 @import "./mixin";
 
-._container {
-  padding-top: 120px;
+.logo-container {
+  background-image: url("../img/bg.jpg");
+  background-position-y: 65%;
+  background-size: cover;
+  position: relative;
+  height: 200px;
+  width: 600px;
+  margin: 0 auto 20px;
+
+  .text {
+    width: 100%;
+    height: 100%;
+    font-size: 12vw;
+    font-weight: bold;
+    margin: 0 auto;
+    padding: 10px;
+    text-align: center;
+    color: black;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    background-color: white;
+    mix-blend-mode: screen;
+    text-transform: capitalize;
+  }
+}
+
+.search {
+  width: 670px;
+  margin: 0 auto;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 30px;
+  transition: 0.5s ease;
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.15);
+
+  &.active {
+    height: 380px;
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.25);
+    .form {
+      &:before {
+        opacity: 1;
+      }
+    }
+  }
 }
 
 .form {
-  // @include glassBG();
   @include flexCenter();
   border-radius: 40px;
   width: 670px;
@@ -13,7 +58,6 @@
   padding: 10px;
   margin: 0 auto;
   position: relative;
-  // box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.25);
 
   &:before {
     content: "";
@@ -24,7 +68,7 @@
     width: 90%;
     height: 1px;
     background-color: #eaeaea;
-    transition: .5s;
+    transition: 0.5s;
     opacity: 0;
   }
 
@@ -104,7 +148,7 @@
       li {
         display: block;
         padding: 10px 20px;
-        transition: ease .5s;
+        transition: ease 0.5s;
         &:not(:last-child) {
           margin-bottom: 15px;
         }

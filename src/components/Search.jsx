@@ -1,55 +1,72 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import style from "../style/search.module.scss";
+import React, { useState, useEffect, useRef } from "react";
+// import { Link } from "react-router-dom";
 import SearchIcon from "../img/loupe.svg";
-import ClockIcon from "../img/clock.svg";
+// import ClockIcon from "../img/clock.svg";
 import socketIOClient from "socket.io-client";
-import parse from 'html-react-parser'
+import parse from "html-react-parser";
 const ENDPOINT = "http://192.168.1.208:4001";
 
 function Search(props) {
-
   const [response, setResponse] = useState("");
+  const [showSuggest, setShowSuggest] = useState(false);
+  const wrapperRef = useRef(null);
 
   useEffect(() => {
     const socket = socketIOClient(ENDPOINT);
-    socket.emit('keysearch', 'FAB');
-    socket.on("htmltag", data => {
+    socket.emit("keysearch", "FAB");
+    socket.on("htmltag", (data) => {
       setResponse(data);
     });
   }, []);
 
-  const [showSuggest, setShowSuggest] = useState(false);
+  // NOTE: click outside SEARCH-FORM will close suggest box
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setShowSuggest(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [wrapperRef]);
 
   const ToggleSuggest = () => {
     setShowSuggest(true);
   };
 
-  return (
-    <div className={style.search}>
-      <form className={style.form}>
-        <div className={style.icon}>
-          <img src={SearchIcon} alt="search icon" />
-        </div>
-        <input type="text" onClick={ToggleSuggest} />
-        <button>Search</button>
-      </form>
+  const suggestClass = () => {
+    return "search " + (showSuggest ? "active" : "default");
+  };
 
-      {showSuggest ? (
-        <div className={style.suggest}>
-          <div className={style.suggest__content}>
-            <div className={style.suggest__list}>
-              <ul>
-                {parse(response)}
-              </ul>
+  return (
+    <div className="_container-search">
+      <div className="logo-container">
+        <div className="text">hamitr</div>
+      </div>
+      <div id="search-form" className={suggestClass()} ref={wrapperRef}>
+        <form className="form">
+          <div className="icon">
+            <img src={SearchIcon} alt="search icon" />
+          </div>
+          <input type="text" onClick={ToggleSuggest} />
+          <button>Search</button>
+        </form>
+
+        {showSuggest ? (
+          <div className="suggest">
+            <div className="suggest__content">
+              <div className="suggest__list">
+                <ul>{parse(response)}</ul>
+              </div>
             </div>
           </div>
-        </div>
-      ) : (
-        <p className={style.hint}>
-          ex. Fabbi JSC, Edso Labs, Together we can do it, ...
-        </p>
-      )}
+        ) : (
+          <></>
+        )}
+      </div>
     </div>
   );
 }

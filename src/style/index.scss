@@ -1,14 +1,17 @@
-@import "./mixin";
+@import './mixin';
+
+._container-search {
+  padding-top: 15vh;
+}
 
 .logo-container {
-  background-image: url("../img/bg.jpg");
-  background-position-y: 65%;
+  background-position-y: 45%;
   background-size: cover;
   position: relative;
   height: 200px;
   width: 600px;
   margin: 0 auto 20px;
-
+  user-select: none;
   .text {
     width: 100%;
     height: 100%;
@@ -37,11 +40,11 @@
   overflow: hidden;
   border-radius: 30px;
   transition: 0.5s ease;
-  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.35);
 
   &.active {
-    height: 380px;
-    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.25);
+    height: 340px;
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
     .form {
       &:before {
         opacity: 1;
@@ -60,7 +63,7 @@
   position: relative;
 
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -147,11 +150,8 @@
 
       li {
         display: block;
-        padding: 10px 20px;
+        padding: 10px 20px 10px 60px;
         transition: ease 0.5s;
-        &:not(:last-child) {
-          margin-bottom: 15px;
-        }
 
         &:hover {
           background-color: #f7f7f7;

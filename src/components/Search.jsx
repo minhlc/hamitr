@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import SearchIcon from '../img/loupe.svg'
 // import ClockIcon from "../img/clock.svg";
 import LogoText from './LogoText'
+import Weather from './Weather'
 
 import socketIOClient from 'socket.io-client'
 import parse from 'html-react-parser'
@@ -45,6 +46,7 @@ function Search(props) {
 
   return (
     <div className='_container-search'>
+      <Weather></Weather>
       <LogoText></LogoText>
       <div id='search-form' className={suggestClass()} ref={wrapperRef}>
         <form className='form'>

@@ -1,23 +1,24 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from "react"
 // import { Link } from "react-router-dom";
-import SearchIcon from '../img/loupe.svg'
+import SearchIcon from "../img/loupe.svg"
 // import ClockIcon from "../img/clock.svg";
-import LogoText from './LogoText'
-import Weather from './Weather'
+import LogoText from "./LogoText"
+import Weather from "./Weather"
+import SearchSuggest from "./SearchSuggest"
 
-import socketIOClient from 'socket.io-client'
-import parse from 'html-react-parser'
-const ENDPOINT = 'http://192.168.1.208:4001'
+import socketIOClient from "socket.io-client"
+
+const ENDPOINT = "http://192.168.1.208:4001"
 
 function Search(props) {
-  const [response, setResponse] = useState('')
+  const [response, setResponse] = useState("")
   const [showSuggest, setShowSuggest] = useState(false)
   const wrapperRef = useRef(null)
 
   useEffect(() => {
     const socket = socketIOClient(ENDPOINT)
-    socket.emit('keysearch', 'FAB')
-    socket.on('htmltag', (data) => {
+    socket.emit("keysearch", "FAB")
+    socket.on("htmltag", (data) => {
       setResponse(data)
     })
   }, [])
@@ -30,9 +31,9 @@ function Search(props) {
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener("mousedown", handleClickOutside)
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener("mousedown", handleClickOutside)
     }
   }, [wrapperRef])
 
@@ -41,33 +42,23 @@ function Search(props) {
   }
 
   const suggestClass = () => {
-    return 'search ' + (showSuggest ? 'active' : 'default')
+    return "search " + (showSuggest ? "active" : "default")
   }
 
   return (
-    <div className='_container-search'>
+    <div className="container__search">
       <Weather></Weather>
       <LogoText></LogoText>
-      <div id='search-form' className={suggestClass()} ref={wrapperRef}>
-        <form className='form'>
-          <div className='icon'>
-            <img src={SearchIcon} alt='search icon' />
+      <div id="search-form" className={suggestClass()} ref={wrapperRef}>
+        <form className="form">
+          <div className="icon">
+            <img src={SearchIcon} alt="search icon" />
           </div>
-          <input type='text' onClick={ToggleSuggest} />
+          <input type="text" onClick={ToggleSuggest} />
           <button>Search</button>
         </form>
 
-        {showSuggest ? (
-          <div className='suggest'>
-            <div className='suggest__content'>
-              <div className='suggest__list'>
-                <ul>{parse(response)}</ul>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <></>
-        )}
+        {showSuggest ? <SearchSuggest links={response}></SearchSuggest> : <></>}
       </div>
     </div>
   )

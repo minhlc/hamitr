@@ -1,13 +1,7 @@
-import React from "react";
-import styles from "../style/layout.module.scss";
-import "../style/index.scss"
+import React from "react"
 
 function Layout({ children }) {
-  return (
-    <div className={styles.layout}>
-      <div className={styles.content}>{children}</div>
-    </div>
-  );
+  return <div className="layout">{children}</div>
 }
 
-export default Layout;
+export default Layout

@@ -72,8 +72,8 @@ function Weather(props) {
           </b>
           <div className="_other">
             <p className="_other__item">Summary: {weather.summary}</p>
-            <p className="_other__item">Humidity: {weather.humidity * 100}%</p>
-            <p className="_other__item">Wind: {weather.windSpeed}</p>
+            <p className="_other__item">Humidity: {weather.humidity * 100} %</p>
+            <p className="_other__item">Wind: {weather.windSpeed} km/h</p>
           </div>
         </div>
       ) : (

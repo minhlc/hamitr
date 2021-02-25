@@ -38,7 +38,7 @@ function Weather(props) {
   const getWeatherNow = () => {
     axios
       .get(
-        `${process.env.REACT_APP_HEROKU}${process.env.REACT_APP_DARKSKY_URL}${process.env.REACT_APP_DARKSKY_KEY}/${lat},${long}`
+        `${process.env.REACT_APP_DARKSKY_URL}${process.env.REACT_APP_DARKSKY_KEY}/${lat},${long}`
       )
       .then((res) => {
         let data = res.data

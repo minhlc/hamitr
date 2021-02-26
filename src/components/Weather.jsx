@@ -38,7 +38,13 @@ function Weather(props) {
   const getWeatherNow = () => {
     axios
       .get(
-        `${process.env.REACT_APP_DARKSKY_URL}${process.env.REACT_APP_DARKSKY_KEY}/${lat},${long}`
+        `${process.env.REACT_APP_HEROKU}${process.env.REACT_APP_DARKSKY_URL}${process.env.REACT_APP_DARKSKY_KEY}/${lat},${long}`,
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+          },
+        }
       )
       .then((res) => {
         let data = res.data
